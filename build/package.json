@@ -1,0 +1,25 @@
+{
+  "name": "build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NullRoz007",
+  "license": "ISC",
+  "dependencies": {
+    "fetch-openapi": "^0.6.1",
+    "openapi-client": "^0.10.5",
+    "request": "^2.81.0",
+    "swagger-client": "^3.0.20",
+    "tosource": "^1.0.0",
+    "typescript": "^2.4.2",
+    "typescript-compiler": "^1.4.1-2",
+    "typescript-require": "^0.2.9-1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.34"
+  }
+}

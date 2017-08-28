@@ -1,0 +1,19 @@
+{
+  "name": "destiny2-client",
+  "version": "1.0.0",
+  "description": "API Wrapper for Destiny 2",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NullRoz007/d2client.git"
+  },
+  "author": "NullRoz007",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NullRoz007/d2client/issues"
+  },
+  "homepage": "https://github.com/NullRoz007/d2client#readme"
+}
