@@ -1,0 +1,46 @@
+FlatJS adds the new 'flat' operator to nodejs,
+in an effort to remove so-called 'callback hell',
+(as long the callback of the function being flatted is it's last argument, it can be flatted, otherwise an error will be thrown)
+
+The FlatJS syntax,
+
+'foo(args, (function_result) => {...});'
+
+
+becomes:
+
+'var function_result = flat foo(args).Data;'
+
+flatted functions return a FlatResult object:
+FlatResult {
+  Error,
+  Data
+}
+
+'Data' contains the result of the callback,
+'Error' contains any error thrown in the function.
+
+This allows for Error handling similar to what would
+be avaliable using callbacks. 
+
+Internally this looks like:
+var function_result = flatjs(foo, [args], ...);
+
+-------------------------------------------------------
+Importing JS files:
+
+Currently there is no support for npm modules,
+so the file path will have to point to an actual file.
+
+require_flat(f) is used to require FlatJS files,
+you can call require_flat without flatting it first:
+
+require_flat("filename", (m) => {
+  ...
+});
+
+however this is not inkeeping with the goals of FlatJS,
+better to flat the call first.
+
+var m = flat require_flat("filename").Data;
+
