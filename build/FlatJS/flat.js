@@ -94,7 +94,7 @@ if(require.main === module){
 	  for (c = 0; c < text.length; c++){
 		var char = text[c];
 		proc += char;
-		inString = (char == '"' || char == "'") ? true : false;
+		inString = (char == '"')
 		var check = proc.substr(proc.length - 5);
 
 		if(check.substr(check.length - 4) == "flat" && text[c + 1] == " "){

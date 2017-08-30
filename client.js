@@ -28,16 +28,6 @@ var destiny_client = function(api_key){
 	return destiny_client;
 }
 
-/*function get_schema_from_ref(ref){	
-	for (c_name in destiny_client.backend.types){
-		for(type_name in destiny_client.backend.types[c_name].schema){
-			if(ref == type_name){
-				var type = destiny_client.backend.types[c_name].schema[type_name];
-				return type;
-			}
-		}
-	}
-}*/
 
 destiny_client.prototype.startTestServer = function(callback){
 	var resolved = jref.resolveRefs(this.backend.spec)
