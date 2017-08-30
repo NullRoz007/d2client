@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/NullRoz007/d2client/issues"
   },
-  "homepage": "https://github.com/NullRoz007/d2client#readme"
+  "homepage": "https://github.com/NullRoz007/d2client#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "json-ref-lite": "^1.1.0",
+    "json-refs": "^3.0.0"
+  }
 }

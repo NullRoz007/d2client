@@ -3,6 +3,7 @@ var ClientError = require('./ClientError.js');
 
 var client = {
 	base: "",
+	spec: {},
 	authorization: {
 		headers: {},
 		oauth2: {}
@@ -69,6 +70,7 @@ function build_response_mapping(paths){
 	for (p in paths){
 		var map = {
 			top: 'response',
+			path: p,
 			class_name: '',
 			type: ''
 		};
@@ -83,14 +85,19 @@ function build_response_mapping(paths){
 	return maps;
 }
 
-function handle_result(res){
-	if (res.Response && res.Response.data) {
-            return res.Response.data;
-        } else if (res.Response) {
-            return res.Response;
-        } else {
-            return res;
-    }
+function handle_result(response, result){
+	var type;
+	var href = response.request.uri.href.replace('www.', '');
+	var path_name = href.split(client.base)[1];
+	if (result.Response && result.Response.data) {
+         mapped_result = result.Response.data;
+    } else if (result.Response) {
+        mapped_result = result.Response;
+    } else {
+        mapped_result = result;
+	}
+	
+	var isArray = Array.isArray(mapped_result);
 }
 
 function build_function(paths, c_name, f_name){
@@ -123,9 +130,9 @@ function build_function(paths, c_name, f_name){
 				if(request_type == "get") {
 					
 					request(options, (error, response, body) => {
-						console.log(body);
+						//console.log(body);
 						if(error) callback(error);
-						var handled = handle_result(JSON.parse(body));
+						var handled = handle_result(response, JSON.parse(body));
 						callback(handled);
 					});
 				}
@@ -161,7 +168,7 @@ function build_function(paths, c_name, f_name){
 					request.post(options, (error, response, body) => {
 						if(error) callback(error);
 						var json = JSON.parse(body);
-						console.log(body);
+						//console.log(body);
 						var handled = handle_result(json);
 						callback(handled);
 					});
@@ -177,6 +184,8 @@ module.exports = function(specification, valid_names){
 	client.base = specification.servers[0].url;
 	var classes = get_class_names(specification.paths);
 	client['functions'] = {};
+	client.mapping = build_response_mapping(specification.paths);
+	
 	for (c in classes){
 		var class_name = classes[c];
 		client['functions'][class_name] = {};
@@ -194,7 +203,7 @@ module.exports = function(specification, valid_names){
 		var types = create_types(specification.components, name);
 		client.types[name] = types;
 	}
+	client.spec = specification;
 	
-	client.mapping = build_response_mapping(specification.paths);
 	return client;
 };
